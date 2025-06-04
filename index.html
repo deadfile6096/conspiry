@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESTORED ARTIFACTS</title>
+    <link rel="icon" href="favicon/favicon.png" type="image/png">
+    <style>
+        body {
+            background-color: #081421; /* Фоновый цвет на случай, если видео не загрузится */
+            color: #00FF99;
+            font-family: 'monospace', 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll from glitch effects */
+            position: relative; /* Для правильного позиционирования фонового видео */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 1px dashed #00FF99;
+            position: relative;
+        }
+        
+        /* Стили для логотипа */
+        .site-logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 300px;
+            z-index: 10;
+        }
+        
+        .site-logo img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.7));
+            transition: filter 0.3s;
+        }
+        
+        .site-logo:hover img {
+            filter: drop-shadow(0 0 15px rgba(0, 255, 153, 0.9));
+        }
+        
+        /* Стили для изображений в углах */
+        .corner-image {
+            position: fixed;
+            bottom: 20px;
+            width: 150px;
+            height: auto;
+            z-index: 10;
+            opacity: 0.8;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .corner-image.left {
+            left: 20px;
+        }
+        
+        .corner-image.right {
+            right: 20px;
+            width: 60px; /* Меньший размер для логотипа Twitter */
+        }
+        
+        .corner-image img {
+            width: 100%;
+            height: auto;
+            filter: brightness(0.9) contrast(1.2) sepia(0.2);
+        }
+        
+        .twitter-logo {
+            filter: brightness(1) contrast(1) sepia(0) !important;
+            transition: filter 0.3s;
+        }
+        
+        .twitter-logo:hover {
+            filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 5px rgba(0, 255, 153, 0.7)) !important;
+        }
+        
+        /* Стили для плавающих изображений */
+        .floating-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+        
+        .floating-image {
+            position: absolute;
+            opacity: 0.2;
+            filter: grayscale(0.8) contrast(1.2) brightness(0.8);
+            transform: rotate(var(--rotation));
+            animation: float var(--duration) linear infinite;
+        }
+        
+        .floating-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        #float1 {
+            width: 120px;
+            top: 15%;
+            left: 10%;
+            --duration: 120s;
+            --rotation: 15deg;
+        }
+        
+        #float2 {
+            width: 100px;
+            top: 60%;
+            left: 75%;
+            --duration: 100s;
+            --rotation: -10deg;
+        }
+        
+        #float3 {
+            width: 90px;
+            top: 75%;
+            left: 30%;
+            --duration: 150s;
+            --rotation: 5deg;
+        }
+        
+        #float4 {
+            width: 110px;
+            top: 25%;
+            left: 65%;
+            --duration: 130s;
+            --rotation: -20deg;
+        }
+        
+        #float5 {
+            width: 130px;
+            top: 40%;
+            left: 20%;
+            --duration: 160s;
+            --rotation: 12deg;
+        }
+        
+        #float6 {
+            width: 90px;
+            top: 10%;
+            left: 80%;
+            --duration: 140s;
+            --rotation: -8deg;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(var(--rotation));
+            }
+            25% {
+                transform: translate(-20vw, 10vh) rotate(calc(var(--rotation) + 5deg));
+            }
+            50% {
+                transform: translate(0, 20vh) rotate(var(--rotation));
+            }
+            75% {
+                transform: translate(20vw, 10vh) rotate(calc(var(--rotation) - 5deg));
+            }
+            100% {
+                transform: translate(0, 0) rotate(var(--rotation));
+            }
+        }
+        
+        .corner-image:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .terminal-text {
+            font-size: 1.2em;
+            white-space: pre-wrap; /* Preserve line breaks and spaces */
+            margin-bottom: 20px;
+        }
+
+        .classified-warning {
+            color: #FFFFFF;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            border: 1px solid #FFFFFF;
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .archive-button {
+            background-color: #00FF99;
+            color: #081421;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-family: 'monospace', 'Courier New', Courier, monospace;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .archive-button:hover {
+            background-color: #FFFFFF;
+            color: #081421;
+            cursor: crosshair;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px dashed #00FF99;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Artifacts & Leaks Cards */
+        #artifacts .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px; /* Увеличенный отступ между элементами */
+            width: 100%;
+            margin: 40px auto;
+            padding: 30px; /* Дополнительное пространство вокруг */
+        }
+
+        /* General card grid for other sections like Leaks */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card { /* General card styles - for Leaks section etc. */
+            background-color: #0d1b2a;
+            border: 1px solid #00FF99;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer; /* Default cursor */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Artifact Card Specific Styles */
+        #artifacts .card {
+            width: 240px;
+            height: 340px;
+            position: relative;
+            transform-origin: center center;
+            user-select: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            padding: 0;
+            overflow: hidden;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        #artifacts .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Изображение заполняет всю карточку, сохраняя пропорции */
+            display: block; /* Убираем лишние отступы внизу изображения */
+        }
+
+        #artifacts .card.swiped-out-left {
+            transform: translate(calc(-50% - 100vw), -50%) rotate(-45deg) !important;
+            opacity: 0;
+        }
+        #artifacts .card.swiped-out-right {
+            transform: translate(calc(-50% + 100vw), -50%) rotate(45deg) !important;
+            opacity: 0;
+        }
+
+        .card:hover { /* General card hover - for Leaks section etc. */
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px #00FF99;
+            cursor: crosshair; /* Default hover cursor */
+        }
+
+        /* Specific hover for the current top artifact card */
+        #artifacts .card.current-top-card:hover {
+            /* The base transform is set by JS, this enhances it slightly on hover */
+            /* Example: transform: translate(calc(-50% + Xpx), calc(-50% + Ypx)) scale(slightly_larger) rotate(current_angle) !important; */
+            /* For simplicity, we'll just increase shadow and ensure cursor is grab */
+            box-shadow: 0 0 25px #00FF99, 0 4px 15px rgba(0,0,0,0.5) !important;
+            cursor: grab !important;
+            /* A slight scale can be added here if desired, e.g., by adjusting the scale in its existing transform */
+        }
+
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(8, 20, 33, 0.9);
+        }
+
+        .modal-content {
+            background-color: #0d1b2a;
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid #00FF99;
+            width: 70%;
+            max-width: 600px;
+            position: relative;
+            color: #FFFFFF;
+        }
+
+        .modal-close {
+            color: #00FF99;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #FFFFFF;
+            text-decoration: none;
+            cursor: crosshair;
+        }
+
+        /* Фоновое видео для всего сайта */
+        .site-video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10; /* Под всем содержимым */
+            overflow: hidden;
+        }
+
+        .site-background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: saturate(1.2) contrast(1.1) brightness(0.5); /* Затемняем для лучшей читаемости */
+        }
+
+        .site-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(8, 20, 33, 0.8); /* Более темный полупрозрачный фон */
+            z-index: 1;
+        }
+
+        /* Стили для секции с видео (теперь без фонового видео) */
+        #video-materials {
+            position: relative;
+            min-height: 40vh;
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        /* Стили для карточек в секции ARCHIVED FOOTAGE */
+        .archive-card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .archive-card {
+            position: relative;
+            height: 250px;
+            border: 2px solid #00FF99;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .archive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        
+        .archive-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.5) contrast(1.2) brightness(0.8);
+            transition: filter 0.3s;
+        }
+        
+        .archive-card:hover .archive-image {
+            filter: grayscale(0.2) contrast(1.3) brightness(0.9);
+        }
+        
+        .archive-card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        .archive-card-title {
+            color: #00FF99;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .archive-card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .video-wrapper iframe,
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                rgba(255, 255, 255, 0.03),
+                rgba(255, 255, 255, 0.03) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            opacity: 0.7;
+            pointer-events: none; /* Allow interaction with video player */
+            z-index: 1;
+        }
+        
+        /* Visual Anomalies - Placeholders */
+        .scanlines::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 153, 0.05) 2px,
+                rgba(0, 255, 153, 0.05) 4px
+            );
+            pointer-events: none; /* Allow clicks through */
+            z-index: 9999;
+            animation: scanline-flicker 0.1s infinite alternate;
+        }
+
+        .grain::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.1"/></svg>');
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.5;
+        }
+
+        /* Glitch effect for edges - can be enhanced with JS */
+        @keyframes glitch-anim {
+            0% { clip-path: inset(2% 0 5% 0); }
+            20% { clip-path: inset(10% 0 25% 0); }
+            40% { clip-path: inset(5% 0 15% 0); }
+            60% { clip-path: inset(20% 0 5% 0); }
+            80% { clip-path: inset(15% 0 30% 0); }
+            100% { clip-path: inset(2% 0 5% 0); }
+        }
+
+        @keyframes scanline-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Apply glitch to body or specific elements if desired */
+        /* body {
+            animation: glitch-anim 5s infinite alternate-reverse step-end;
+        } */
+
+        .glitch-active {
+            animation: glitch-anim 0.2s linear;
+        }
+
+        /* Adaptations for widescreen and 4K monitors */
+        @media screen and (min-width: 1920px) {
+            .container {
+                max-width: 1600px;
+            }
+            
+            .terminal-text {
+                font-size: 1.4em;
+            }
+            
+            .section-title {
+                font-size: 2.5em;
+            }
+            
+            #artifacts .card {
+                width: 350px;
+                height: 500px;
+            }
+            
+            .archive-card {
+                height: 280px;
+            }
+            
+            .classified-warning {
+                font-size: 1.1em;
+                padding: 15px;
+                max-width: 800px;
+                margin: 40px auto;
+            }
+        }
+        
+        @media screen and (min-width: 2560px) {
+            .container {
+                max-width: 2000px;
+            }
+            
+            .terminal-text {
+                font-size: 1.6em;
+            }
+            
+            .section-title {
+                font-size: 3em;
+            }
+            
+            #artifacts .card {
+                width: 400px;
+                height: 550px;
+            }
+            
+            .archive-card {
+                height: 320px;
+            }
+            
+            .classified-warning {
+                font-size: 1.2em;
+                padding: 20px;
+                max-width: 1000px;
+                margin: 50px auto;
+            }
+            
+            .modal-content {
+                max-width: 1200px;
+                padding: 40px;
+            }
+            
+            #modalTitle {
+                font-size: 2.2em;
+            }
+            
+            #modalDescription {
+                font-size: 1.3em;
+                line-height: 1.8;
+            }
+        }
+        
+        @media screen and (min-width: 3840px) {
+            .container {
+                max-width: 2800px;
+            }
+            
+            .terminal-text {
+                font-size: 2em;
+            }
+            
+            .section-title {
+                font-size: 3.5em;
+            }
+            
+            #artifacts .card {
+                width: 500px;
+                height: 700px;
+            }
+            
+            .archive-card {
+                height: 400px;
+            }
+            
+            .classified-warning {
+                font-size: 1.5em;
+                padding: 30px;
+                max-width: 1400px;
+                margin: 60px auto;
+            }
+            
+            .modal-content {
+                max-width: 1800px;
+                padding: 60px;
+            }
+            
+            #modalTitle {
+                font-size: 2.8em;
+            }
+            
+            #modalDescription {
+                font-size: 1.6em;
+                line-height: 2;
+            }
+            
+            .archive-button {
+                font-size: 1.8em;
+                padding: 20px 40px;
+            }
+        }
+    </style>
+</head>
+<body class="scanlines grain">
+    <!-- Фоновое видео для всего сайта -->
+    <div class="site-video-background">
+        <video autoplay loop muted playsinline class="site-background-video">
+            <source src="img/video_placeholder.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="site-video-overlay"></div>
+    </div>
+    
+    <!-- Изображение в левом нижнем углу -->
+    <div class="corner-image left">
+        <img src="img/steel_secret.png" alt="Classified Symbol">
+    </div>
+    
+    <!-- Логотип Twitter в правом нижнем углу -->
+    <div class="corner-image right">
+        <a href="https://x.com/home" target="_blank" rel="noopener noreferrer">
+            <img src="img/twitter.png" alt="Twitter/X" class="twitter-logo">
+        </a>
+    </div>
+    
+    <!-- Плавающие изображения -->
+    <div class="floating-images">
+        <div class="floating-image" id="float1">
+            <img src="img/kennedi.jpg" alt="Kennedy">
+        </div>
+        <div class="floating-image" id="float2">
+            <img src="img/dollar.jpg" alt="Dollar">
+        </div>
+        <div class="floating-image" id="float3">
+            <img src="img/masson.png" alt="Masonic Symbol">
+        </div>
+        <div class="floating-image" id="float4">
+            <img src="img/Rockefeller.jpg" alt="Rockefeller">
+        </div>
+        <div class="floating-image" id="float5">
+            <img src="img/chemestry.jpg" alt="Chemistry Formula">
+        </div>
+        <div class="floating-image" id="float6">
+            <img src="img/dollar.jpg" alt="Dollar" style="transform: scaleX(-1);">
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="site-logo">
+            <img src="img/logo.png" alt="CLASSIFIED ARCHIVE 404 Logo">
+        </div>
+        <div class="container">
+            <div class="terminal-text" id="terminal-output" style="margin-top: 200px;">
+</div>
+            <div class="classified-warning">
+                THIS FILE HAS BEEN CLASSIFIED. UNAUTHORIZED ACCESS IS PUNISHABLE BY LAW.
+            </div>
+            
+            <!-- Leaks Section -->
+            <section class="section" id="leaks">
+                <div class="container">
+                    <h2 class="section-title">DATA LEAKS</h2>
+                    <div class="card-grid">
+                        <div class="card" onclick="openModal('leak1')">
+                            <h3 class="card-title">Leak 001 – Project: Grey Covenant</h3>
+                        </div>
+                        <div class="card" onclick="openModal('leak2')">
+                            <h3 class="card-title">Leak 002 – City Z</h3>
+                        </div>
+                        <div class="card" onclick="openModal('leak3')">
+                            <h3 class="card-title">Leak 003 – Signal 4.2.14</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <button class="archive-button" onclick="scrollToSection('artifacts')">OPEN ARCHIVE</button>
+        </div>
+    </section>
+
+    <!-- Restored Artifacts Section -->
+    <section class="section" id="artifacts">
+        <div class="container">
+            <h2 class="section-title">RESTORED ARTIFACTS</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <img src="img/card_newspaper/newspaper_1.webp" alt="Newspaper Artifact 1">
+                </div>
+                <div class="card">
+                    <img src="img/card_newspaper/newspaper_2.webp" alt="Newspaper Artifact 2">
+                </div>
+                <div class="card">
+                    <img src="img/card_newspaper/newspaper_3.webp" alt="Newspaper Artifact 3">
+                </div>
+                <div class="card">
+                    <img src="img/card_newspaper/newspaper_4.webp" alt="Newspaper Artifact 4">
+                </div>
+                <div class="card">
+                    <img src="img/card_newspaper/newspaper_5.jpg" alt="Newspaper Artifact 5">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Materials Section -->
+    <section class="section" id="video-materials">
+        <div class="container">
+            <h2 class="section-title">ARCHIVED FOOTAGE</h2>
+            <p class="video-description">Brief description of the footage. Recovered from Site-██, shows anomalous activity.</p>
+            
+            <!-- Добавляем карточки с фотографиями в ряд -->
+            <div class="archive-card-grid">
+                <div class="archive-card">
+                    <img src="img/archive/111.jpg" alt="Archive Photo 1" class="archive-image">
+                    <div class="archive-card-overlay">
+                        <span class="archive-card-title">FOOTAGE #1</span>
+                    </div>
+                </div>
+                <div class="archive-card">
+                    <img src="img/archive/222.jpg" alt="Archive Photo 2" class="archive-image">
+                    <div class="archive-card-overlay">
+                        <span class="archive-card-title">FOOTAGE #2</span>
+                    </div>
+                </div>
+                <div class="archive-card">
+                    <img src="img/archive/333.jpg" alt="Archive Photo 3" class="archive-image">
+                    <div class="archive-card-overlay">
+                        <span class="archive-card-title">FOOTAGE #3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaks Section moved under classified warning message -->
+
+    <!-- Modal Structure -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle">Item Title</h3>
+            <p id="modalDescription">Item description and short story will appear here.</p>
+            <!-- Placeholder for image/video in modal if needed -->
+            <img id="modalImage" src="" alt="Artifact Image" style="max-width:100%; display:none;">
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Terminal text animation
+        const terminalOutput = document.getElementById('terminal-output');
+        const initialText = terminalOutput.innerHTML;
+        terminalOutput.innerHTML = ''; // Clear initial text for animation
+        let i = 0;
+        const speed = 50; // Speed of typing in milliseconds
+        const lines = [
+            "nginx\n",
+            "ACCESS GRANTED...\n",
+            "RESTORED ARTIFACTS...\n"
+        ];
+        let currentLine = 0;
+        let currentChar = 0;
+
+        function typeTerminal() {
+            if (currentLine < lines.length) {
+                if (currentChar < lines[currentLine].length) {
+                    terminalOutput.innerHTML += lines[currentLine].charAt(currentChar);
+                    currentChar++;
+                    setTimeout(typeTerminal, speed);
+                } else {
+                    currentChar = 0;
+                    currentLine++;
+                    setTimeout(typeTerminal, speed * 3); // Pause slightly between lines
+                }
+            } else {
+                // Animation finished, show the original full text if needed or just leave as is
+            }
+        }
+        
+        // Start terminal animation after a short delay
+        setTimeout(typeTerminal, 500);
+
+        // Modal functionality
+        const modal = document.getElementById('itemModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalImage = document.getElementById('modalImage');
+
+        const modalData = {
+            artifact1: {
+                title: "Scanned Letter - Top Secret",
+                description: "A partially redacted letter recovered from a burn bag. Contents suggest communication between high-level officials regarding an 'unidentified aerial phenomenon'.",
+                image: "https://via.placeholder.com/400x300.png?text=Scanned+Letter+Placeholder"
+            },
+            artifact2: {
+                title: "UFO Photograph - Case #734",
+                description: "Grainy photograph taken by a civilian pilot in 1967. The object remains unidentified. Debriefing notes indicate severe memory alteration of the witness.",
+                image: "https://via.placeholder.com/400x300.png?text=UFO+Photo+Placeholder"
+            },
+            artifact3: {
+                title: "Newspaper Clipping - August 12, 1982",
+                description: "Article from a local newspaper detailing unusual seismic activity and power outages in a remote town. Official explanation: 'minor earthquake'. Unofficial reports mention strange lights.",
+                image: "https://via.placeholder.com/400x300.png?text=Newspaper+Placeholder"
+            },
+            artifact4: {
+                title: "Corrupted Video Feed - Sector Gamma",
+                description: "Fragment of a security camera feed from an abandoned research facility. The footage is heavily distorted, but brief moments show unidentifiable figures and equipment malfunction.",
+                image: "https://via.placeholder.com/400x300.png?text=Video+Feed+Placeholder"
+            },
+            artifact5: {
+                title: "DARPA_Experiments_1974.zip - Recovered Data",
+                description: "A compressed archive allegedly containing research notes and experiment logs from a discontinued DARPA project. File is password-protected; attempts to decrypt have been unsuccessful.",
+                image: "https://via.placeholder.com/400x300.png?text=DARPA+Folder+Placeholder"
+            },
+            leak1: {
+                title: "Leak 001 – Project: Grey Covenant",
+                description: "[PARTIALLY DECLASSIFIED, 1903-1962] \n\nProject 'Grey Covenant' officially initiated post-Roswell 1947, yet its tendrils stretch back to Nikola Tesla's Wardenclyffe Tower experiments (circa 1903-1917) and whispers of his alleged communication with 'off-world intelligences'. Documents hint at a clandestine pact between a shadow U.S. government faction and an enigmatic group cryptically termed 'The Visitors' or 'Benefactors'. This pact wasn't merely about technology; it involved an exchange of biological samples and an agreement for limited, covert observation of human development. \n\nIn 1953, a wave of inexplicable disappearances swept through scientists linked to the project, coinciding with anomalous atmospheric phenomena and localized temporal distortions reported by air force pilots over restricted airspaces. Eyewitnesses, later subjected to aggressive memory alteration protocols, spoke of 'ships that defied physics' and 'beings of light'. The 'Omega Protocol,' a chilling contingency plan for mass contact or overt hostile action, was activated and then mysteriously rescinded within 72 hours, its details reclassified to levels beyond even presidential clearance. \n\nIt's notable that the Bilderberg Group's formation in 1954 involved key figures with deep ties to 'Grey Covenant' oversight. Leaked internal memos suggest discussions not just of advanced propulsion or energy systems, but of 'consciousness-assisted technology,' quantum entanglement communication devices far exceeding known physics, and even rudimentary spatio-temporal manipulation. Rumors persist of a hidden facility, 'Site K', beneath a major North American mountain range, where recovered non-terrestrial craft and 'Visitor' emissaries were allegedly housed. The project's abrupt scaling-down in the early 1960s is linked to a catastrophic incident involving a 'dimensional gateway' experiment, the details of which remain one of the most closely guarded secrets in U.S. history.",
+                image: "https://via.placeholder.com/400x300.png?text=Leak+001+Placeholder"
+            },
+            leak2: {
+                title: "Leak 002 – City Z Incident Report",
+                description: "[TOP SECRET, EYES ONLY, 1908-1973] \n\nThe 'City Z' Incident (believed to be Sverdlovsk-45, USSR, now Lesnoy) on October 17, 1973, was far more than a localized psychic anomaly. Reports from deeply embedded assets within the Soviet 'Psychotronics and Special Energetics' program detail a city-wide hive-mind event affecting approximately 15,000 inhabitants. For 72 hours, the populace exhibited synchronized mass behavior, collective auditory and visual hallucinations (many reporting visions of 'geometric entities speaking in mathematical language'), and demonstrable low-level telepathic linkage.\n\nThe official Soviet explanation cited an industrial chemical leak, a blatant cover for a full-scale field test of the 'Cerebral Resonator MK-IV'. This device, an evolution of technology reverse-engineered from an artifact recovered near the 1908 Tunguska event site, was rumored to amplify and broadcast specific brainwave frequencies. The Tunguska artifact itself, described in fragmented KGB files as a 'crystalline lattice of unknown origin,' reportedly pulsed with faint energy signatures and induced vivid precognitive dreams in those who handled it.\n\nIntriguingly, this period saw parallel, albeit less overt, experiments in the U.S. under MK-Ultra Subproject 117, focusing on 'remote influence' and 'psychic warfare'. Declassified (and heavily redacted) CIA documents suggest a potential, disturbing link between these disparate programs, possibly facilitated by a shadowy, internationally operating scientist known only as 'Doktor Schwarz' or 'Mr. Blackwood,' a figure who appears in intelligence dossiers from Berlin in the 1930s to South America in the 1960s, always associated with fringe science and unexplained phenomena. The City Z event supposedly culminated in the temporary opening of a 'localized reality tear,' with several individuals vanishing without a trace, their disappearances expunged from all records.",
+                image: "https://via.placeholder.com/400x300.png?text=Leak+002+Placeholder"
+            },
+            leak3: {
+                title: "Leak 003 – Signal 4.2.14 Analysis",
+                description: "[CODE WORD: COSMIC WHISPER, 1901-2004] \n\nSignal 4.2.14, first logged by the Arecibo Radio Telescope on February 14, 1991 (months before the USSR's dissolution), was not an isolated incident. Archival records from early radio pioneers, including Marconi's alleged reception of 'intelligible signals' in 1901 and Tesla's claims of detecting 'rhythmic cosmic noise' from his Colorado Springs experiments, suggest a long history of such anomalous transmissions. The 1991 signal, repeating every 108 minutes (a number significant in various esoteric traditions) for 33 days, contained a complex prime number sequence followed by a layered cryptographic code. Initial decryption attempts hinted at advanced astrophysical data and, more disturbingly, what appeared to be genetic markers.\n\nIn 1998, a near-identical signal burst was detected emanating from beneath the Antarctic ice sheet, prompting the covert establishment of the multinational research station 'Ice Cube Zero' (distinct from the public neutrino observatory). By 2004, a select team of mathematicians and cryptographers, working under extreme secrecy, partially deciphered a segment of the signal. It revealed precise coordinates in the Indian Ocean and a future date: December 26, 2004 – the day of the devastating Boxing Day Tsunami. The signal also contained what was interpreted as a 'warning' or 'marker' related to a significant geophysical event.\n\nThe 'Cassandra Protocol,' mentioned in classified briefings, was not merely a predictive system but an alleged active interface, a desperate attempt to understand and perhaps even influence the source of these signals, believed by some within the project to be a non-human intelligence or a natural cosmic phenomenon with predictive qualities. Weeks before the 2004 tsunami, all key scientific personnel involved in the decryption were abruptly evacuated under a cover story. Whispers within the intelligence community suggest the signal wasn't just a warning, but possibly a trigger, or that its decryption itself had unforeseen, catastrophic consequences. The source and ultimate purpose of Signal 4.2.14 remain one of Earth's most profound and terrifying mysteries.",
+                image: "https://via.placeholder.com/400x300.png?text=Leak+003+Placeholder"
+            }
+        };
+
+        function openModal(itemId) {
+            const data = modalData[itemId];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalDescription.textContent = data.description;
+                if (data.image) {
+                    modalImage.src = data.image;
+                    modalImage.style.display = 'block';
+                } else {
+                    modalImage.style.display = 'none';
+                }
+                modal.style.display = "block";
+            }
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            modalImage.src = ""; // Clear image src
+        }
+
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Cursor distortion (simple example - can be enhanced)
+        // This is a very basic effect. More complex ones might be too much for 'no frameworks'.
+        document.addEventListener('mousemove', function(e) {
+            // Example: Slightly offset a custom cursor or change system cursor
+            // For a truly custom cursor, you'd hide the default cursor and use a div that follows the mouse.
+            // For simplicity, we've used CSS for cursor changes on interactive elements.
+        });
+
+        // Optional: Add a subtle glitch effect to the whole page periodically
+        // This is a CSS animation, but JS could trigger it or change its parameters
+        // For now, the CSS keyframe 'glitch-anim' is defined and applied via JS.
+        setInterval(() => {
+            document.body.classList.add('glitch-active');
+            setTimeout(() => document.body.classList.remove('glitch-active'), 200); // Glitch for 200ms
+        }, 7000); // Glitch every 7 seconds
+
+
+        // --- Artifact Card Stack Logic ---
+        const artifactCardsContainer = document.querySelector('#artifacts .card-grid');
+        let artifactCards = [];
+        if (artifactCardsContainer) {
+            artifactCards = Array.from(artifactCardsContainer.querySelectorAll('#artifacts .card')); // Specific selector for artifact cards
+        }
+        let currentArtifactIndex = 0;
+
+        function setupArtifactCards() {
+            if (!artifactCardsContainer || artifactCards.length === 0) {
+                return;
+            }
+            
+            // Добавляем хаотичность в размещении газет
+            artifactCards.forEach((card, index) => {
+                // Случайный угол поворота для каждой карточки (-10 до 10 градусов)
+                const randomRotation = (Math.random() * 20 - 10);
+                
+                // Случайные смещения по X и Y
+                const randomX = (Math.random() * 40 - 20);
+                const randomY = (Math.random() * 30 - 15);
+                
+                // Случайный z-index для перекрытия
+                const randomZ = Math.floor(Math.random() * 5) + 1;
+                
+                card.style.position = 'relative';
+                card.style.transform = `rotate(${randomRotation}deg) translate(${randomX}px, ${randomY}px)`;
+                card.style.zIndex = randomZ;
+                card.style.opacity = '1';
+                card.style.cursor = 'pointer';
+                card.style.transition = 'all 0.3s ease';
+                card.style.margin = '25px';
+                card.classList.remove('current-top-card', 'swiped-out-left', 'swiped-out-right');
+                
+                // Добавляем эффект при наведении
+                card.onmouseover = () => {
+                    card.style.transform = `rotate(0deg) scale(1.1)`;
+                    card.style.boxShadow = '0 0 20px #00FF99';
+                    card.style.zIndex = '10';
+                };
+                
+                card.onmouseout = () => {
+                    card.style.transform = `rotate(${randomRotation}deg) translate(${randomX}px, ${randomY}px)`;
+                    card.style.boxShadow = '0 2px 10px rgba(0,0,0,0.4)';
+                    card.style.zIndex = randomZ;
+                };
+            });
+        }
+
+        // Функция swipeArtifactCard больше не используется, поскольку все карточки отображаются одновременно
+        function swipeArtifactCard(cardElement) {
+            // Пустая функция, эффект пролистывания отключен
+            return;
+        }
+
+        // Initial setup for artifact cards when the script runs
+        // (assuming DOM elements are already available as script is at the end of body)
+        if (artifactCards.length > 0) {
+            setupArtifactCards();
+        }
+        // --- End of Artifact Card Stack Logic ---
+    </script>
+
+</body>
+</html>
